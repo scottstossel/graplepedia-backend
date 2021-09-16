@@ -1,4 +1,4 @@
-const { json } = require('express');
+const cloudinary = require('cloudinary').v2;
 const express = require('express');
 const Technique = require('../models/Technique');
 const router = express.Router();
@@ -36,14 +36,19 @@ router.post('/technique', async (req, res) => {
 
 //POST image
 router.post('/technique/imageUpload/:id', async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const techniqueToUpdate = await Technique.findById(id);
 
   if (techniqueToUpdate.img) {
     let array = techniqueToUpdate.img.split('/');
+    techniqueToUpdate.img = "";
     let fileName = array[array.length-1];
     const [public_id] = fileName.split('.');
-    await cloudinary.uploader.destroy(public_id);
+    try {
+      await cloudinary.uploader.destroy(public_id);
+    } catch (error) {
+      console.log('no cloudinary image');
+    }
   }
 
   const {tempFilePath} = req.files.image;

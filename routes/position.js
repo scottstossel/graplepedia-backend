@@ -39,12 +39,17 @@ router.post('/position', async (req, res) => {
 router.post('/position/imageUpload/:id', async (req, res) => {
   const { id } = req.params;
   const positionToUpdate = await Position.findById(id);
-
+  
   if (positionToUpdate.img) {
     let array = positionToUpdate.img.split('/');
+    positionToUpdate.img = "";
     let fileName = array[array.length-1];
     const [public_id] = fileName.split('.');
-    await cloudinary.uploader.destroy(public_id)
+    try {
+      await cloudinary.uploader.destroy(public_id);
+    } catch (error) {
+      console.log('no cloudinary image')
+    }
   }
 
   const { tempFilePath } = req.files.image;
