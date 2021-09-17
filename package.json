@@ -19,6 +19,8 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,5 +32,9 @@
   "bugs": {
     "url": "https://github.com/scottstossel/graplepedia-backend/issues"
   },
-  "homepage": "https://github.com/scottstossel/graplepedia-backend#readme"
+  "homepage": "https://github.com/scottstossel/graplepedia-backend#readme",
+  "engines": {
+    "node": "14.x"
+  }
 }
+  
