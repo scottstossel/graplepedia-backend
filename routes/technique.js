@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 //get technique
 router.get('/technique/:id', async (req, res) => {
   const {id} = req.params;
-  const singleTechnique = await Technique.findById(id);
+  const singleTechnique = await Technique.findById(id).populate("position");
   try {
     return res.status(200).json(singleTechnique);
   } catch (error) {

@@ -4,15 +4,15 @@ const User = require('../models/User');
 const router = express.Router();
 
 //GET Users
-router.get('/', async (req, res) => {
-  const users = await User.find();
-  try {
-      return res.status(200).json(users);
-    } catch (error) {
-      return res.status(500).json({message: "Couldn't get the users"})
-    }
-  }
-)
+// router.get('/', async (req, res) => {
+//   const users = await User.find();
+//   try {
+//       return res.status(200).json(users);
+//     } catch (error) {
+//       return res.status(500).json({message: "Couldn't get the users"})
+//     }
+//   }
+// )
 
 //POST - Sign In
 router.post('/signup', async (req, res) => {
@@ -26,7 +26,7 @@ router.post('/signup', async (req, res) => {
   }
 })
 
-//POST - Sign Up
+//POST - Login
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
